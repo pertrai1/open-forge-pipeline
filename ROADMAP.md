@@ -105,13 +105,13 @@ This roadmap breaks down the REQUIREMENTS.md into atomic, self-contained tasks t
 
 ### Tasks
 
-- [ ] 4.1 Implement session manager [deps: 1.3] [deliverable: `src/lib/orchestrator/session.ts` - createSession(), endSession(), getSessionState()]
-- [ ] 4.2 Implement intent & model router [deps: 1.6] [deliverable: `src/lib/orchestrator/router.ts` - classifyIntent(), selectStrategy(), routeModelByComplexity()]
-- [ ] 4.3 Implement phase executor [deps: 2.4, 3.1] [deliverable: `src/lib/orchestrator/executor.ts` - executePhase(), handlePhaseFailure()]
-- [ ] 4.4 Implement context compressor [deps: 4.1] [deliverable: `src/lib/orchestrator/compressor.ts` - compressSession(), extractMiddleContext()]
-- [ ] 4.5 Implement orchestrator main loop [deps: 4.1, 4.2, 4.3, 4.4] [deliverable: `src/lib/orchestrator/index.ts` - runPipeline(), runContinuous(), runSinglePhase()]
-- [ ] 4.6 Implement execution mode handler [deps: 4.5] [deliverable: `src/lib/orchestrator/modes.ts` - single-phase, continuous, range modes]
-- [ ] 4.7 Write tests for orchestrator [deps: 4.1-4.6] [deliverable: `tests/orchestrator.test.ts`]
+- [x] 4.1 Implement session manager [deps: 1.3] [deliverable: `src/lib/orchestrator/session.ts` - createSession(), endSession(), getSessionState()]
+- [x] 4.2 Implement intent & model router [deps: 1.6] [deliverable: `src/lib/orchestrator/router.ts` - classifyIntent(), selectStrategy(), routeModelByComplexity()]
+- [x] 4.3 Implement phase executor [deps: 2.4, 3.1] [deliverable: `src/lib/orchestrator/executor.ts` - executePhase(), handlePhaseFailure()]
+- [x] 4.4 Implement context compressor [deps: 4.1] [deliverable: `src/lib/orchestrator/compressor.ts` - compressSession(), extractMiddleContext()]
+- [x] 4.5 Implement orchestrator main loop [deps: 4.1, 4.2, 4.3, 4.4] [deliverable: `src/lib/orchestrator/index.ts` - runPipeline(), runContinuous(), runSinglePhase()]
+- [x] 4.6 Implement execution mode handler [deps: 4.5] [deliverable: `src/lib/orchestrator/modes.ts` - single-phase, continuous, range modes]
+- [x] 4.7 Write tests for orchestrator [deps: 4.1-4.6] [deliverable: `tests/orchestrator.test.ts`]
 
 **Parallel Groups**:
 
