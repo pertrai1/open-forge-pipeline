@@ -889,7 +889,7 @@ open-forge-pipeline/
 │   ├── lib/
 │   │   ├── roadmap/
 │   │   │   ├── parser.ts     # ROADMAP.md parsing
-│   │   │   ├── generator.ts  # ROADMAP generation from requirements
+│   │   │   ├── generate-roadmap.ts  # ROADMAP generation from requirements
 │   │   │   └── types.ts      # ROADMAP types
 │   │   ├── handoff/
 │   │   │   ├── manager.ts    # HANDOFF.md operations
