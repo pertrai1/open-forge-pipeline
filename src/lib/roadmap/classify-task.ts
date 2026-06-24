@@ -14,6 +14,15 @@ const COMPLEX_KEYWORDS = [
   'overhaul',
 ];
 
+const DEP_THRESHOLD_SIMPLE = 2;
+const DEP_THRESHOLD_MEDIUM = 4;
+
+export interface ClassifyTaskInput {
+  readonly description: string;
+  readonly dependencies: readonly string[];
+  readonly _deliverable: string;
+}
+
 /**
  * Classify task complexity based on dependency count (primary) and
  * description keywords (secondary, can only elevate).
@@ -26,19 +35,16 @@ const COMPLEX_KEYWORDS = [
  *
  * Keywords can elevate but never lower the classification.
  */
-export function classifyTask(
-  description: string,
-  dependencies: readonly string[],
-  _deliverable: string
-): TaskComplexity {
+export function classifyTask(input: ClassifyTaskInput): TaskComplexity {
+  const { description, dependencies } = input;
   const depCount = dependencies.length;
 
   let base: TaskComplexity;
   if (depCount === 0) {
     base = 'trivial';
-  } else if (depCount <= 2) {
+  } else if (depCount <= DEP_THRESHOLD_SIMPLE) {
     base = 'simple';
-  } else if (depCount <= 4) {
+  } else if (depCount <= DEP_THRESHOLD_MEDIUM) {
     base = 'medium';
   } else {
     base = 'complex';

@@ -1,4 +1,4 @@
-import { detectParallelGroups } from '../src/lib/roadmap/parallel.js';
+import { detectParallelGroups } from '../src/lib/roadmap/detect-parallel-groups.js';
 import type { RoadmapTask } from '../src/lib/roadmap/types.js';
 
 function makeTask(

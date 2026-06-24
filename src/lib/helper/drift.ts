@@ -165,14 +165,14 @@ export async function checkDriftSentinel(filePath: string): Promise<boolean> {
 export async function clearDriftSentinel(filePath: string): Promise<void> {
   try {
     await unlink(filePath);
-  } catch (err: unknown) {
+  } catch (error: unknown) {
     if (
-      err instanceof Error &&
-      'code' in err &&
-      (err as NodeJS.ErrnoException).code === 'ENOENT'
+      error instanceof Error &&
+      'code' in error &&
+      (error as NodeJS.ErrnoException).code === 'ENOENT'
     ) {
       return;
     }
-    throw err;
+    throw error;
   }
 }

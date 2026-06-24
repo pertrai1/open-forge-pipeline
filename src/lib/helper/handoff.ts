@@ -59,6 +59,6 @@ export function getLastCommit(state: HandoffState): string {
   }
 
   const last = state.taskLog[state.taskLog.length - 1];
-  const hash = last.commitHash || '(no commit)';
+  const hash = last.commitHash.length > 0 ? last.commitHash : '(no commit)';
   return `${hash} — ${last.description}`;
 }
