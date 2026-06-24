@@ -71,9 +71,8 @@ describe('scanForInjection', () => {
     const types = result.findings.map((f) => f.type);
     expect(types).toContain('instruction-override');
     // Should have at least one of invisible-unicode or exfiltration
-    expect(
-      types.includes('invisible-unicode') || types.includes('exfiltration')
-    ).toBe(true);
+    const allowed = new Set(['invisible-unicode', 'exfiltration']);
+    expect(types.some((t) => allowed.has(t))).toBe(true);
   });
 });
 

@@ -77,18 +77,18 @@ async function shadowGit(cmd: GitCommand): Promise<string> {
     ...process.env,
     GIT_DIR: cmd.gitDir,
   };
-  if (cmd.useWorkTree !== false) env.GIT_WORK_TREE = cmd.workDir;
+  if (cmd.useWorkTree ?? true) env.GIT_WORK_TREE = cmd.workDir;
   try {
     const { stdout } = await execFile('git', cmd.args, {
       env,
       cwd: cmd.workDir,
     });
     return stdout.trim();
-  } catch (err: unknown) {
-    const error = err as { stderr?: string };
+  } catch (error: unknown) {
+    const caught = error as { stderr?: string };
     throw new CheckpointGitError(
       `git ${cmd.args.join(' ')}`,
-      error.stderr ?? String(err)
+      caught.stderr ?? String(error)
     );
   }
 }

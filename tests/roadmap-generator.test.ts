@@ -1,4 +1,4 @@
-import { generateRoadmap } from '../src/lib/roadmap/generator.js';
+import { generateRoadmap } from '../src/lib/roadmap/generate-roadmap.js';
 import type { Roadmap, RoadmapPhase } from '../src/lib/roadmap/types.js';
 
 function makePhase(overrides: Partial<RoadmapPhase> = {}): RoadmapPhase {
@@ -43,7 +43,7 @@ describe('generateRoadmap', () => {
     expect(output).toContain('## Phase 1: Types');
     expect(output).toContain('## Phase 2: Parser');
     // Each phase section preceded by ---
-    const dividerCount = (output.match(/^---$/gm) || []).length;
+    const dividerCount = (output.match(/^---$/gm) ?? []).length;
     expect(dividerCount).toBeGreaterThanOrEqual(3);
   });
 

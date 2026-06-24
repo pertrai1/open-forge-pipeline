@@ -4,6 +4,9 @@
 
 import { z } from 'zod';
 
+const DEFAULT_AGENT_TIMEOUT_MS = 300_000;
+const DEFAULT_IMPLEMENTER_TIMEOUT_MS = 600_000;
+
 /** Schema for project-level configuration. */
 export const ProjectConfigSchema = z.object({
   name: z.string().min(1),
@@ -18,7 +21,7 @@ export const ProjectConfigSchema = z.object({
 /** Schema for agent-specific configuration. */
 export const AgentConfigSchema = z.object({
   enabled: z.boolean().default(true),
-  timeout: z.number().int().positive().default(300_000),
+  timeout: z.number().int().positive().default(DEFAULT_AGENT_TIMEOUT_MS),
 });
 
 /** Schema for pipeline execution configuration. */
@@ -35,12 +38,20 @@ export const AgentsConfigSchema = z.object({
     AgentConfigSchema.parse(v ?? {})
   ),
   implementer: AgentConfigSchema.extend({
-    timeout: z.number().int().positive().default(600_000),
+    timeout: z
+      .number()
+      .int()
+      .positive()
+      .default(DEFAULT_IMPLEMENTER_TIMEOUT_MS),
   })
     .optional()
     .transform((v) =>
       AgentConfigSchema.extend({
-        timeout: z.number().int().positive().default(600_000),
+        timeout: z
+          .number()
+          .int()
+          .positive()
+          .default(DEFAULT_IMPLEMENTER_TIMEOUT_MS),
       }).parse(v ?? {})
     ),
   gateAgent: AgentConfigSchema.optional().transform((v) =>
