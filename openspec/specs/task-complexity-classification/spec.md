@@ -5,22 +5,25 @@ Classify `RoadmapTask` complexity as trivial/simple/medium/complex based on deli
 ## Requirements
 
 ### Requirement: Classify task complexity
-The system SHALL provide a `classifyTask(description: string, dependencies: readonly string[], deliverable: string): TaskComplexity` function that returns a deterministic complexity classification.
+The system SHALL provide a `classifyTask(input: ClassifyTaskInput): TaskComplexity` function that returns a deterministic complexity classification. `ClassifyTaskInput` is an object with the following readonly fields:
+- `description: string` — task description analyzed for complexity-elevating keywords
+- `dependencies: readonly string[]` — dependency identifiers; the count is the primary complexity signal
+- `_deliverable: string` — deliverable descriptor (reserved for future deliverable-based heuristics)
 
 #### Scenario: Trivial task — no dependencies, single simple deliverable
-- **WHEN** given description "Rename config file", dependencies [] (empty), and deliverable "tsconfig.json"
+- **WHEN** given an input object with description "Rename config file", dependencies [] (empty), and `_deliverable` "tsconfig.json"
 - **THEN** the returned complexity is `'trivial'`
 
 #### Scenario: Simple task — few dependencies, single deliverable
-- **WHEN** given description "Add logging utility", dependencies ["0.1"], and deliverable "src/lib/logger.ts"
+- **WHEN** given an input object with description "Add logging utility", dependencies ["0.1"], and `_deliverable` "src/lib/logger.ts"
 - **THEN** the returned complexity is `'simple'`
 
 #### Scenario: Medium task — moderate dependencies, multi-file deliverable
-- **WHEN** given description "Implement authentication middleware", dependencies ["1.1", "1.2", "1.3"], and deliverable "src/lib/auth/middleware.ts - validateToken(), refreshSession()"
+- **WHEN** given an input object with description "Implement authentication middleware", dependencies ["1.1", "1.2", "1.3"], and `_deliverable` "src/lib/auth/middleware.ts - validateToken(), refreshSession()"
 - **THEN** the returned complexity is `'medium'`
 
 #### Scenario: Complex task — many dependencies
-- **WHEN** given description "Implement orchestrator main loop", dependencies ["4.1", "4.2", "4.3", "4.4", "4.5"], and deliverable "src/lib/orchestrator/index.ts"
+- **WHEN** given an input object with description "Implement orchestrator main loop", dependencies ["4.1", "4.2", "4.3", "4.4", "4.5"], and `_deliverable` "src/lib/orchestrator/index.ts"
 - **THEN** the returned complexity is `'complex'`
 
 ### Requirement: Deterministic classification
